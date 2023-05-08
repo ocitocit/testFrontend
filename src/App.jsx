@@ -8,6 +8,8 @@ function App() {
     aspek_penilaian_4: {},
   });
 
+  const [showJson, setShowJson] = useState(false);
+
   const handleInput = (event, aspek, mahasiswa) => {
     const value = parseInt(event.target.value);
     setPenilaian((prevState) => ({
@@ -17,14 +19,17 @@ function App() {
         [mahasiswa]: value,
       },
     }));
+    setShowJson(false);
   };
 
   const handleSimpan = () => {
     console.log(penilaian);
+    setShowJson(true);
   };
 
   return (
     <div className="App">
+      <h1>Aplikasi Penilaian Mahasiswa</h1>
       <table>
         <thead>
           <tr>
@@ -65,6 +70,13 @@ function App() {
         </tbody>
       </table>
       <button onClick={handleSimpan}>Simpan</button>
+      {showJson && (
+        <>
+          <h2>Hasil</h2>
+
+          {JSON.stringify(penilaian)}
+        </>
+      )}
     </div>
   );
 }
